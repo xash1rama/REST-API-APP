@@ -1,0 +1,33 @@
+services:
+  app:
+    container_name: test_nebus
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+    networks:
+      - mynetwork
+    depends_on:
+      - postgres
+
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./db:/var/lib/postgresql/data
+      - ./db_log:/var/lib/postgresql/pg_log
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
