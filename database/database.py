@@ -80,7 +80,6 @@ class Activity(Base):
         return depth
 
     def can_add_subactivity(self):
-        """Проверяет, можно ли добавить подкатегорию"""
         return self.get_depth() < 3
 
 
