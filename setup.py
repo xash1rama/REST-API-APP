@@ -4,11 +4,11 @@ from fastapi.exceptions import HTTPException
 from fastapi.security import APIKeyHeader
 from sqlalchemy.ext.asyncio import AsyncSession
 from schemas.schemas_organizations import ResultAllOrganizations, ResultOrganization
-from database.database import engine, Base, session, Activity, Build, Organization
+from database.model import engine, Base, session, Activity, Build, Organization
 from dotenv import load_dotenv
 import os
 from sqlalchemy import select
-from random import randint,choices
+from random import randint
 
 
 load_dotenv(".env")

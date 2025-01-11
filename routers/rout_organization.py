@@ -2,10 +2,11 @@ from sqlalchemy import func
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload, joinedload
-from schemas.schemas_organizations import ResultOrganization, ResultAllOrganizations, ErrorModel, \
+from schemas.schemas_organizations import ResultOrganization, ResultAllOrganizations, \
      GetCoordinates, CreateOrganization, AddOrganization, DeleteOrganization
+from schemas.schemas_error import ErrorModel
 from setup import verify_token, get_session
-from database.database import Build, Organization, Activity
+from database.model import Build, Organization, Activity
 from sqlalchemy.future import select
 
 
@@ -48,7 +49,6 @@ async def get_organizations_by_build(
 
     except Exception as er:
         return ErrorModel(
-            result=False,
             error_type=str(type(er).__name__),
             error_message=str(er),
         )
@@ -83,7 +83,6 @@ async def get_organizations(
 
     except Exception as er:
         return ErrorModel(
-            result=False,
             error_type=str(type(er).__name__),
             error_message=str(er),
         )
@@ -128,7 +127,6 @@ async def get_organizations_by_location(
 
     except Exception as er:
         return ErrorModel(
-            result=False,
             error_type=str(type(er).__name__),
             error_message=str(er),
         )
@@ -160,7 +158,6 @@ async def get_info_organizations(
 
     except Exception as er:
         return ErrorModel(
-            result=False,
             error_type=str(type(er).__name__),
             error_message=str(er),
         )
@@ -191,7 +188,6 @@ async def get_info_organizations_for_name(
 
     except Exception as er:
         return ErrorModel(
-            result=False,
             error_type=str(type(er).__name__),
             error_message=str(er),
         )
@@ -223,7 +219,6 @@ async def create_organization(
                                   activity=activity.name)
     except Exception as er:
         return ErrorModel(
-            result=False,
             error_type=str(type(er).__name__),
             error_message=str(er),
         )
@@ -254,7 +249,6 @@ async def delete_organization_by_id(
         )
     except Exception as er:
         return ErrorModel(
-                result=False,
                 error_type=str(type(er).__name__),
                 error_message=str(er),
             )

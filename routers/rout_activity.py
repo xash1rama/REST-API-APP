@@ -1,9 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
-from schemas.schemas_organizations import ResultOrganization, ResultAllOrganizations, ErrorModel, GetCoordinates
+from schemas.schemas_organizations import ResultOrganization, ResultAllOrganizations, GetCoordinates
 from schemas.schemas_activity import DeleteActivity, ResultActivity, ResultAllActivities, ResponseActivity
+from schemas.schemas_error import ErrorModel
 from setup import verify_token, get_session, get_all_subactivity_ids
-from database.database import Build, Organization, Activity
+from database.model import Build, Organization, Activity
 from sqlalchemy.future import select
 from setup import search_level
 from sqlalchemy.orm import selectinload
@@ -52,7 +53,6 @@ async def get_organizations_by_activity(activity_name: str,
 
     except Exception as er:
         return ErrorModel(
-            result=False,
             error_type=str(type(er).__name__),
             error_message=str(er),
         )
@@ -76,7 +76,6 @@ async def create_activity(activity: ResultActivity,
 
     except Exception as er:
         return ErrorModel(
-                result=False,
                 error_type=str(type(er).__name__),
                 error_message=str(er),
             )
@@ -107,7 +106,6 @@ async def add_activity(
         )
     except Exception as er:
         return ErrorModel(
-                result=False,
                 error_type=str(type(er).__name__),
                 error_message=str(er),
             )

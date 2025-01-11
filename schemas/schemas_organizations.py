@@ -1,13 +1,5 @@
 from typing import List, Optional
 from pydantic import BaseModel
-from .schemas_activity import ResultAllActivities
-
-class ErrorModel(BaseModel):
-    """Возвращает информацию об ошибке в операции"""
-    result: bool
-    error_type: str
-    error_message: str
-
 
 
 class ResultOrganization(BaseModel):

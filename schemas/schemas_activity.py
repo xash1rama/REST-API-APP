@@ -2,13 +2,6 @@ from typing import Optional, List
 from pydantic import BaseModel
 
 
-class ErrorModel(BaseModel):
-    """Возвращает информацию об ошибке в операции"""
-    result:bool
-    error_type:str
-    error_message:str
-
-
 class ResultActivity(BaseModel):
     name: str
     parent_id: Optional[int] = None

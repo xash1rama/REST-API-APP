@@ -1,12 +1,13 @@
 from fastapi import APIRouter, Depends, HTTPException
-from schemas.schemas_build import ErrorModel, ResultAllBuildings, ResultBuilding, CreateBuild
+from schemas.schemas_build import ResultAllBuildings, ResultBuilding, CreateBuild
 from schemas.schemas_build import CreateBuild as DeleteBuild
 from schemas.schemas_organizations import GetCoordinates
+from schemas.schemas_error import ErrorModel
 from sqlalchemy import func
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from setup import verify_token, get_session
-from database.database import Build
+from database.model import Build
 
 router = APIRouter(tags=["buildings"])
 
@@ -32,7 +33,6 @@ async def get_buildings(
 
     except Exception as er:
         return ErrorModel(
-            result=False,
             error_type=str(type(er).__name__),
             error_message=str(er),
         )
@@ -62,7 +62,6 @@ async def crate_build(
 
     except Exception as er:
         return ErrorModel(
-            result=False,
             error_type=str(type(er).__name__),
             error_message=str(er),
         )
@@ -94,7 +93,6 @@ async def delete_building(
 
     except Exception as er:
         return ErrorModel(
-            result=False,
             error_type=str(type(er).__name__),
             error_message=str(er),
         )
@@ -133,7 +131,6 @@ async def get_organizations_by_location(
 
     except Exception as er:
         return ErrorModel(
-            result=False,
             error_type=str(type(er).__name__),
             error_message=str(er),
         )

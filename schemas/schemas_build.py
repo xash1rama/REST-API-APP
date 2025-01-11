@@ -1,13 +1,5 @@
-from typing import Optional, List, Dict
+from typing import Optional, List
 from pydantic import BaseModel
-
-
-class ErrorModel(BaseModel):
-    """Возвращает информацию об ошибке в операции"""
-    result:bool
-    error_type:str
-    error_message:str
-
 
 
 class ResultBuilding(BaseModel):
