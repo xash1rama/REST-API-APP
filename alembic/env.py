@@ -4,8 +4,8 @@ from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from alembic import context
-from database.database import *
-from database.database import Base
+from database.model import *
+from database.model import Base
 from dotenv import load_dotenv
 import os
 
